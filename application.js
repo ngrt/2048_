@@ -387,6 +387,10 @@ $(document).ready(function(){
 	$(document).keydown(function(e){
 		oldArray = divToArray();
 
+		$(".tile-new").each(function(){
+			$(this).removeClass("tile-new");
+		});
+
 		if (e.which == 39)
 		{
 			sortedTiles = $(".tile").sort(function (a,b){return getPosition($(b).getClasses()[2])[1] - getPosition($(a).getClasses()[2])[1]});

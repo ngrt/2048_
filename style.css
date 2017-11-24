@@ -104,10 +104,10 @@ body{
    	transition: 100ms;
 }
 
-.tile-new{
-	animation: appear 200ms ease 100ms;
-	animation-fill-mode: backwards;
+.tile-new {
+	
 }
+
 
 .tile-2{
 	background-color: #eee4da;
