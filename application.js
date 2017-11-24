@@ -174,8 +174,10 @@ function mergeLeft()
 					arrayOfPositions[i][j+2] = arrayOfPositions[i][j+3];
 					arrayOfPositions[i][j+3] = 0;
 				}
-				
+
 				arrayOfPositions[i][j] *= 2;
+				score += parseInt(arrayOfPositions[i][j], 10);
+				updateScore();
 			}
 		}
 	}
@@ -208,6 +210,8 @@ function mergeRight()
 				}
 				
 				arrayOfPositions[i][j] *= 2;
+				score += parseInt(arrayOfPositions[i][j],10);
+				updateScore();
 			}
 		}
 	}
@@ -238,8 +242,10 @@ function mergeUp()
 					arrayOfPositions[j+2][i] = arrayOfPositions[j+3][i];
 					arrayOfPositions[j+3][i] = 0;
 				}
-				// arrayOfPositions[j+1][i] = 0;
+
 				arrayOfPositions[j][i] *= 2;
+				score += parseInt(arrayOfPositions[j][i],10);
+				updateScore();
 			}
 		}
 	}
@@ -270,13 +276,21 @@ function mergeDown()
 					arrayOfPositions[j-2][i] = arrayOfPositions[j-3][i];
 					arrayOfPositions[j-3][i] = 0;
 				}
-				// arrayOfPositions[j+1][i] = 0;
+				
+				
 				arrayOfPositions[j][i] *= 2;
+				score += parseInt(arrayOfPositions[j][i],10);
+				updateScore();
 			}
 		}
 	}
 
 	return arrayOfPositions;
+}
+
+function updateScore()
+{
+	$(".score-container p").html("SCORE : " + score);
 }
 
 function arrayToTile(array)
@@ -324,7 +338,7 @@ function addTile()
 		randomPos = randomPosition()
 	}
 
-	console.log(randomPos[0] + " " + randomPos[1]);
+	// console.log(randomPos[0] + " " + randomPos[1]);
 
 	number = getRandomNumber();
 
@@ -332,10 +346,11 @@ function addTile()
 	$(tile).addClass("tile");
 	$(tile).addClass("tile-" + number);
 	$(tile).addClass(fromArrayToClassName(randomPos));
+	$(tile).addClass("tile-new");
 	$(tile).html(number);
 	$(".tile-container").append($(tile));
 
-	console.log($(tile));
+	// console.log($(tile));
 }
 
 function movement(oldArray, newArray)
@@ -355,6 +370,7 @@ function newGame()
 	$(".tile").each(function () {
 		$(this).remove()
 	});
+	score = 0;
 	addTile();
 	addTile();
 }
@@ -366,9 +382,11 @@ $(document).ready(function(){
 		newGame();
 	})
 
+
+
 	$(document).keydown(function(e){
 		oldArray = divToArray();
-		console.log(oldArray);
+
 		if (e.which == 39)
 		{
 			sortedTiles = $(".tile").sort(function (a,b){return getPosition($(b).getClasses()[2])[1] - getPosition($(a).getClasses()[2])[1]});
@@ -385,7 +403,7 @@ $(document).ready(function(){
 
 			arrayToTile(mergeRight());
 			newArray = divToArray();
-			console.log(newArray);
+
 
 			if (movement(oldArray, newArray))
 			{
@@ -410,7 +428,7 @@ $(document).ready(function(){
 			});	
 			arrayToTile(mergeLeft());
 			newArray = divToArray();
-			console.log(newArray);
+			// console.log(newArray);
 			if (movement(oldArray, newArray))
 			{
 				addTile();
@@ -432,7 +450,7 @@ $(document).ready(function(){
 			});	
 			arrayToTile(mergeUp());
 			newArray = divToArray();
-			console.log(newArray);
+			// console.log(newArray);
 			if (movement(oldArray, newArray))
 			{
 				addTile();
@@ -454,7 +472,7 @@ $(document).ready(function(){
 			});	
 			arrayToTile(mergeDown());
 			newArray = divToArray();
-			console.log(newArray);
+			// console.log(newArray);
 			if (movement(oldArray, newArray))
 			{
 				addTile();
