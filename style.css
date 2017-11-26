@@ -1,36 +1,20 @@
 body{
-	margin-top: 30px;
 	background-color: #eee4da;
   	color: rgb(119, 110, 101);
   	font-family: 'Open Sans', sans-serif;
   	font-weight: bold;
 }
 
-.container{
-    /*display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;	*/
-}
-
-.game-container{
-/*	text-align: center;
-	position: relative;*/
+nav{
+	margin-bottom: 30px;
 }
 
 .heading{
   	font-size: 60px;  	
-/*	width: 50%;
-	margin: 0 auto;
-	text-align: center;*/
 }
 
 .above-game{
-/*	width: 50%;
-	margin: 0 auto;*/
 	margin-bottom: 10px;
-	/*text-align: center;*/
 }
 
 #new-game {
@@ -41,20 +25,12 @@ body{
   width: 120px;
 }
 
-.game-container{
-/*	width: 50%;
-	margin: 0 auto;*/
-/*	test-align: inline-block;*/
-}
-
 .score-container{
 	background-color: rgb(119, 110, 101);
 	border-radius: 2%;
 	height: 45px;
 	width: 120px;
 	color: #eee4da;
-	/*text-align: center;*/
-/*	display: inline-block;*/
 	margin-right: 5px;
 }
 
@@ -64,15 +40,44 @@ body{
 	height: 45px;
 	width: 120px;
 	color: #eee4da;
-	/*text-align: center;*/
-/*	display: inline-block;*/
 	margin-left: 5px;
 }
 
+.game-message{
+	position: absolute;
+	display: none;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+	margin: 0%;
+	background: rgba(238, 228, 218, 0.73);
+	animation: fade-in 800ms;
+	
+	text-align: center; 
+}
+
+.game-message p{
+	font-size: 40px;
+}
+
+#try-again {
+	color: #eee4da;
+	background: rgb(119, 110, 101);
+	font-size : 90%;
+	height: 40px;
+	width: 120px;
+}
+
+.game-over{
+	display: block;
+}
+
+.twitter-sharing{
+	margin-top: 10px;
+}
 
 .grid-container{
 	position: absolute;
-	z-index: 1;
 	background-color: #bbada0;
 	border-radius: 1%;
 	padding: 1%;
@@ -92,6 +97,7 @@ body{
 
 .tile{
 	display: flex;
+	z-index: 6;
 	justify-content: center;
 	align-items: center;
 	position: absolute;
@@ -102,10 +108,6 @@ body{
   	font-family: 'Open Sans', sans-serif;
   	font-weight: bold;
    	transition: 100ms;
-}
-
-.tile-new {
-	
 }
 
 
@@ -166,7 +168,7 @@ body{
 
 .tile-container{
 	position: absolute;
-	z-index: 2;
+	z-index: 3;
 
 }
 .tile-position-1-1{

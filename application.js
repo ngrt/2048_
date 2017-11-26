@@ -1,4 +1,5 @@
 var score = 0;
+var bestScore = 0
 
 jQuery.fn.getClasses = function(){
   var ca = this.attr('class');
@@ -293,6 +294,11 @@ function updateScore()
 	$(".score-container p").html("SCORE : " + score);
 }
 
+function updateBestScore()
+{
+	$(".bestscore-container p").html("BEST SCORE : " + bestScore);
+}
+
 function arrayToTile(array)
 {
 	for (var i = 0; i < array.length; i++) {
@@ -370,19 +376,87 @@ function newGame()
 	$(".tile").each(function () {
 		$(this).remove()
 	});
+	$(".game-message").removeClass("game-over");
 	score = 0;
 	addTile();
 	addTile();
 }
 
+function isGameOver(array)
+{
+	isGridFull = true;
+	isBlockedRow = true;
+	isBlockedColumn = true
+	for (var i = 0; i < array.length; i++) {
+		for (var j = 0; j < array[i].length; j++) {
+			if (array[i][j] == 0)
+			{
+				isGridFull = false;
+			}
+
+			if (array[i][j] == array[i][j+1])
+			{
+				isBlockedRow = false;
+			}
+		}
+	}
+
+	for (var i = 0; i < array.length; i++) {
+		for (var j = 0; j < array[i].length-1; j++) {
+			if (array[j][i] == array[j+1][i] && array[j][i] != 0)
+			{
+				isBlockedColumn = false;
+			}
+		}
+	}
+
+	if (isGridFull && isBlockedColumn && isBlockedRow)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+function isWin(array)
+{
+	for (var i = 0; i < array.length; i++) {
+		for (var j = 0; j < array[i].length; j++) {
+			if (array[i][j] == 2048)
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+function showEndMessage()
+{
+	if (isGameOver(divToArray()) || isWin(divToArray()))
+	{
+		$(".game-message").addClass("game-over");
+		$("#try-again").on("click", function(){
+			newGame();
+		});
+	}
+
+	if (score > bestScore)
+	{
+		bestScore = score;
+		updateBestScore();
+	}
+
+	$(".twitter-sharing a").attr("href", "https://twitter.com/share?text=I scored " + score + " points at 2048, a game where you join numbers to score high!;hashtags=simplesharebuttons");
+}
+
 $(document).ready(function(){
 	newGame();
 
-	$("#new-game").on("click", function(){
-		newGame();
-	})
-
-
+	$("#new-game").on("click", newGame());
 
 	$(document).keydown(function(e){
 		oldArray = divToArray();
@@ -413,7 +487,7 @@ $(document).ready(function(){
 			{
 				addTile();
 			}
-			
+		showEndMessage();
 		}
 		else if (e.which == 37)
 		{
@@ -437,6 +511,7 @@ $(document).ready(function(){
 			{
 				addTile();
 			}
+			showEndMessage();
 		}
 		else if (e.which == 38)
 		{
@@ -459,6 +534,7 @@ $(document).ready(function(){
 			{
 				addTile();
 			}
+			showEndMessage();
 		}
 		else if (e.which == 40)
 		{
@@ -481,6 +557,7 @@ $(document).ready(function(){
 			{
 				addTile();
 			}
+			showEndMessage();
 		}
 		
 	})
