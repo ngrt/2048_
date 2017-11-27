@@ -1,0 +1,12 @@
+{
+    "name": "jquery/2048",
+    "authors": [
+        {
+            "name": "Noufel Gouirhate",
+            "email": "noufel.gouirhate@gmail.com"
+        }
+    ],
+    "require": {
+        "facebook/graph-sdk": "^5.6"
+    }
+}

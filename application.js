@@ -1,5 +1,6 @@
 var score = 0;
-var bestScore = 0
+var FCFA;
+
 
 jQuery.fn.getClasses = function(){
   var ca = this.attr('class');
@@ -344,8 +345,6 @@ function addTile()
 		randomPos = randomPosition()
 	}
 
-	// console.log(randomPos[0] + " " + randomPos[1]);
-
 	number = getRandomNumber();
 
 	tile = document.createElement("div");
@@ -355,8 +354,6 @@ function addTile()
 	$(tile).addClass("tile-new");
 	$(tile).html(number);
 	$(".tile-container").append($(tile));
-
-	// console.log($(tile));
 }
 
 function movement(oldArray, newArray)
@@ -368,14 +365,15 @@ function movement(oldArray, newArray)
 		}
 	}
 
-	return false
+	return false;
 }
 
 function newGame()
 {
 	$(".tile").each(function () {
-		$(this).remove()
+		$(this).remove();
 	});
+
 	$(".game-message").removeClass("game-over");
 	score = 0;
 	addTile();
@@ -448,15 +446,44 @@ function showEndMessage()
 	{
 		bestScore = score;
 		updateBestScore();
+
+		$.post("user.php", {'best_score' : bestScore});
 	}
 
-	$(".twitter-sharing a").attr("href", "https://twitter.com/share?text=I scored " + score + " points at 2048, a game where you join numbers to score high!;hashtags=simplesharebuttons");
+	$(".twitter-sharing a").attr("href", "https://twitter.com/share?url=https://github.com/ngrt;text=I scored " + score + " points at 2048, a game where you join numbers to score high!;hashtags=team2048");
 }
 
 $(document).ready(function(){
-	newGame();
+	$.get('user.php')
+	.done(function (data, textStatus, jqXHR){
+		json = $.parseJSON(data);
+		bestScore = json.best_score;
+		updateBestScore();
+		$("#name-user").html("Welcome " + json.first_name + " " + json.last_name);
+		FCFA = json.FCFA;
+		if (FCFA == 0)
+		{
+			$("#new-game").css('background-color', "red");
+			$("#new-game").on("click", function(){
+			alert("We don't have any FCFA. Go to your account to purchase and have more fun!");
+		});
+		}
+		else
+		{
+			newGame();
 
-	$("#new-game").on("click", newGame());
+			$("#new-game").on("click", function(){
+			newGame();
+		});
+		}
+	})
+	.fail(function(){
+
+	})
+	.always(function (){
+
+	});
+
 
 	$(document).keydown(function(e){
 		oldArray = divToArray();

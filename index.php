@@ -7,10 +7,48 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<nav class="navbar navbar-dark bg-dark">
+
+<!-- 	<nav class="navbar navbar-dark bg-dark">
 		<a class="navbar-brand" href="index.html">2048</a>
-		<a class="btn btn-outline-light" href="login.php">LOGIN</a>
-	</nav>
+	    
+		<div class="collapse navbar-collapse">
+			<span class="navbar-text">Welcome Noufel Gouirhate</span>
+			<ul class="navbar-nav">
+			    <li class="nav-item">
+	        		<a class="nav-link" href="#">Features</a>
+	      		</li>
+	      		<li class="nav-item">
+	        		<a class="nav-link" href="#">Pricing</a>
+	      		</li>
+	    	</ul>
+    	</div>
+    	<a class="btn btn-outline-light" id="login" href="login.html">LOGIN</a>
+	</nav> -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">2048_</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="ranking.html">Ranking</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Account</a>
+      </li>
+      <a class="btn btn-outline-light" id="login" href="login.html">LOGIN</a>
+    </ul>
+    <span class="navbar-text center" id="name-user">Welcome Noufel Gouirhate</span>
+		
+  	</div>
+</nav>
 
 	<div class="container">
 		<div class="row">
@@ -79,5 +117,6 @@
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="application.js"></script>
+	<script type="text/javascript" src="fb.js"></script>
 </body>
 </html>
